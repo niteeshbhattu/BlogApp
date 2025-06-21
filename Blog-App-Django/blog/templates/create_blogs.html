@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+     {% block start %}
+
+     <div class="container mt-5">
+        <div class="row">
+            <h1 class="text-center"> </h1>
+
+            <form method="post"  enctype="multipart/form-data" >
+              {% csrf_token %}
+
+              {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-info ">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                <div class="form-group mb-3">
+                  <label for="exampleInputEmail1">  select category  </label>
+                  <select class="form-control " name="category">
+                    <option value="">choose</option>
+                    {% for categorys in category %}
+                    <option value="{{categorys.id}}">{{categorys.category_name}}</option>
+                    {% endfor %}
+
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="exampleInputEmail1">Enter title</label>
+                  <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group mb-3">
+                  {{form.media}}
+                  {{form.as_p}}
+                </div>
+                <div class="form-group mb-3">
+                  <label for="exampleInputEmail1">upload images</label>
+                  <input type="file"  name="banner_image" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              
+        </div>
+     </div>
+     
+     {% endblock %}
